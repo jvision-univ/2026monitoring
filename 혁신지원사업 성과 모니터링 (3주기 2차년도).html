@@ -356,8 +356,8 @@ details.settings summary{cursor:pointer;font-weight:600;font-size:.92rem;color:v
 "use strict";
 const SERVER="Google Drive", TOOL="download_file_content";
 const XLSX_MIME="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-const DEFAULTS={auto:300000,year:"2026",budget:"1DSy1AykvwS8EUbiitkjwMyZirQ_sNRHAR54FV_DTr5A",kpi:"1IjhRAuyoVU2A8re9lsem9l34DQxwrzRO"};
-const LS="innov-monitor-2026-settings";
+const DEFAULTS={auto:300000,year:"2026",budget:"1DSy1AykvwS8EUbiitkjwMyZirQ_sNRHAR54FV_DTr5A",kpi:"1gPFOgivQqbcNb0IKeJTC6WBDXMim6TLGJW1nBP5luBE"};
+const LS="innov-monitor-2026-settings-v2";
 let cfg=Object.assign({auto:300000},DEFAULTS);
 try{const s=JSON.parse(localStorage.getItem(LS)||"null"); if(s) cfg=Object.assign(cfg,s);}catch(e){}
 
