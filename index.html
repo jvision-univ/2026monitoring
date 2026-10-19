@@ -80,7 +80,7 @@ button.link:hover{text-decoration:underline}
 .bar-row .lab small{display:block;color:var(--muted);font-family:var(--f-num);font-size:.78rem;font-weight:400}
 .track{position:relative;height:22px;background:var(--track);border-radius:4px;overflow:hidden}
 .fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:4px}
-.fill.good{background:var(--good)} .fill.warn{background:var(--warn)} .fill.bad{background:var(--bad)} .fill.none{background:var(--line-strong)}
+.fill.good{background:var(--good)} .fill.warn{background:var(--warn)} .fill.bad{background:var(--bad)} .fill.none{background:var(--line-strong)} .fill.exec{background:var(--exec)}
 .pace{position:absolute;top:-3px;bottom:-3px;width:3px;background:var(--target)}
 .pct{text-align:right;font-family:var(--f-num);font-variant-numeric:tabular-nums;font-size:1.05rem;font-weight:500}
 .bar-row.total{border-top:2px solid var(--line);padding-top:14px}
@@ -211,6 +211,75 @@ details.settings summary{cursor:pointer;font-weight:600;font-size:.92rem;color:v
 .pdf-head .s{font-size:.95rem;color:var(--muted)}
 .pdf-mode .no-pdf{visibility:hidden}
 @media (prefers-reduced-motion:no-preference){.fill{transition:width .5s ease}.pdf-mode .fill{transition:none}}
+
+/* ================= responsive (PC ≥1100 · 태블릿 601~1099 · 모바일 ≤600) ================= */
+:root{--exec:#1b5d96}
+.donut-lg svg{width:200px;height:auto}
+@media (max-width:1099px){
+  .hero{grid-template-columns:1fr}
+  .wrap{padding-inline:20px}
+  .tabs button{flex:1 1 0;text-align:center;padding:12px 10px}
+  .tbl-wrap th:first-child,.tbl-wrap td:first-child{position:sticky;left:0;z-index:1;background:var(--surface);box-shadow:1px 0 0 var(--line)}
+  .tbl-wrap thead th:first-child{background:var(--sunk);z-index:2}
+  .tbl-wrap tr.grp td:first-child{background:var(--accent-soft)}
+  .tbl-wrap tr.total td:first-child{background:var(--sunk)}
+  .tbl-wrap tr.subrow>td:first-child{position:static;box-shadow:none;background:var(--sunk)}
+}
+@media (max-width:600px){
+  body{font-size:15px}
+  .wrap{padding-inline:12px;padding-block:14px 32px;gap:14px}
+  h1{font-size:1.35rem} h2{font-size:1.02rem} .eyebrow{font-size:.72rem;letter-spacing:.02em} .asof{font-size:.82rem}
+  .toolbar{padding:10px;gap:8px}
+  .toolbar .grp{width:100%;gap:8px}
+  .toolbar label{flex:1 1 calc(50% - 8px);justify-content:space-between;font-size:.8rem}
+  .toolbar label select{flex:1;min-width:0}
+  .toolbar .refresh-info{width:100%;white-space:normal}
+  .toolbar button{flex:1 1 0;min-height:42px}
+  .toast{width:100%;order:9}
+  .tabs button{font-size:.92rem;padding:11px 4px}
+  article.panel{padding:14px;gap:12px;border-radius:8px}
+  .panel-head{gap:4px}
+  .unit{font-size:.76rem}
+  .sec-no{margin-right:7px}
+  .sec-tag{margin-right:7px;font-size:.68rem}
+  .ov{flex-direction:column;align-items:stretch;gap:16px}
+  .donut-lg{align-self:center}
+  .donut-lg svg{width:150px}
+  .facts,#tab-budget .facts{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px;min-width:0}
+  .facts dd{font-size:1.25rem}
+  .facts .wide,#tab-budget .facts .wide,#tab-budget .facts .wide.comp{grid-column:1/-1}
+  .comp-list{grid-template-columns:10px 1fr auto auto;justify-content:stretch;font-size:.84rem;gap:5px 8px}
+  .comp-bar{max-width:none}
+  .carry-list{grid-template-columns:1fr auto;justify-content:stretch;font-size:.84rem}
+  .kpi-head .big{font-size:2rem}
+  .ov-kpi{grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 8px}
+  .ov-k svg{width:112px;height:auto}
+  .ov-k .nm{font-size:.86rem}
+  .bar-row{grid-template-columns:1fr 64px;gap:4px 10px}
+  .bar-row .lab{grid-column:1/-1;font-size:.92rem}
+  .bar-row .track{height:16px}
+  .pct{font-size:.92rem}
+  .kpis{grid-template-columns:1fr}
+  .kpi .big{font-size:1.9rem}
+  .ech-row{grid-template-columns:1fr 56px;gap:3px 8px}
+  .ech-row .lab{grid-column:1/-1;font-size:.88rem}
+  .ech-row .track{height:14px}
+  .ech-axis{grid-template-columns:1fr 56px;gap:8px}
+  .ech-axis>span:first-child{display:none}
+  .ech-row .pillc,.ech-axis .pillc{display:none}
+  table{font-size:.84rem}
+  th,td{padding:8px 9px}
+  .mini{min-width:112px;gap:6px}
+  .mini .pct{min-width:44px;font-size:.82rem}
+  .dept-tbl>thead>tr>th:nth-child(5),.dept-tbl>thead>tr>th:nth-child(8),
+  #tb-dept>tr.dept>td:nth-child(5),#tb-dept>tr.dept>td:nth-child(8),
+  #tb-dept>tr.total>td:nth-child(5),#tb-dept>tr.total>td:nth-child(8){display:none}
+  #tb-kpi td:first-child{min-width:150px!important;max-width:190px}
+  .formula{max-width:none}
+  details.settings{padding:10px 12px}
+  .dept-tbl th{white-space:nowrap}
+}
+tr.dept td:first-child,tr.dept td:first-child button{white-space:nowrap}
 </style>
 
 <div class="wrap">
@@ -297,10 +366,10 @@ details.settings summary{cursor:pointer;font-weight:600;font-size:.92rem;color:v
         <div class="bars" id="bars-item"><div class="empty">예산 데이터를 불러오면 표시됩니다.</div></div>
       </article>
     </div>
-    <div class="legend" id="pace-legend"></div>
+    <div class="legend" id="pace-legend" hidden></div>
     <article class="panel">
       <div class="panel-head"><h2><span class="sec-no">03</span>부서별 추진현황</h2><span class="muted unit">부서명을 누르면 세부 프로그램이 펼쳐집니다 · 단위: 천원</span></div>
-      <div class="tbl-wrap"><table>
+      <div class="tbl-wrap"><table class="dept-tbl">
         <thead><tr><th>부서</th><th class="r">프로그램</th><th class="r">배정예산</th><th class="r">집행</th><th class="r">잔액</th><th>예산 집행률</th><th>과제 추진률(평균)</th><th class="r">점검<br><span class="muted" style="font-weight:400;font-size:.75rem">100% 초과</span></th></tr></thead>
         <tbody id="tb-dept"><tr><td colspan="8" class="muted">—</td></tr></tbody>
       </table></div>
@@ -401,7 +470,7 @@ function pace(at){
   return (now-start)/(end-start);
 }
 function asOfTime(){ if(state.view!=="live"){const s=state.snaps.find(x=>x.id===state.view); return s?s.savedAt:Date.now();} return Math.max(state.stamp.budget||0,state.stamp.kpi||0)||Date.now(); }
-function budgetCls(r){const p=pace(asOfTime()); if(r==null)return "none"; if(r>=Math.min(1,p)-1e-9)return "good"; if(r>=p-0.1)return "warn"; return "bad";}
+function budgetCls(r){return r==null?"none":"exec";}
 
 /* ---------- parsing ---------- */
 function rowsOf(wb,name){const ws=wb.Sheets[name]; return ws?XLSX.utils.sheet_to_json(ws,{header:1,defval:null,raw:true}):null;}
@@ -489,7 +558,7 @@ function donut(r,c,size,center,sub){
 }
 function groupSum(list,key){const m=new Map(); for(const p of list){const k=p[key]; const g=m.get(k)||{k,alloc:0,exec:0,rem:0,feb:0,n:0,trs:[],anom:0,items:[]}; g.alloc+=p.alloc; g.exec+=p.exec; g.rem+=p.rem; g.feb+=p.feb||0; g.n++; g.items.push(p); if(p.tr!=null){g.trs.push(Math.min(1,p.tr)); if(p.tr>1)g.anom++;} m.set(k,g);} return [...m.values()];}
 function barRow(name,sub,r,extra){const c=budgetCls(r); const p=pace(asOfTime());
-  return `<div class="bar-row${extra?" "+extra:""}"><div class="lab">${esc(name)}<small>${sub}</small></div><div class="track" role="img" aria-label="${esc(name)} 집행률 ${pct(r)}"><div class="fill ${c}" style="width:${Math.min(100,(r||0)*100)}%"></div>${p<1?`<div class="pace" style="left:calc(${p*100}% - 1px)"></div>`:""}</div><div class="pct">${pct(r)}</div></div>`;}
+  return `<div class="bar-row${extra?" "+extra:""}"><div class="lab">${esc(name)}<small>${sub}</small></div><div class="track" role="img" aria-label="${esc(name)} 집행률 ${pct(r)}"><div class="fill ${c}" style="width:${Math.min(100,(r||0)*100)}%"></div></div><div class="pct">${pct(r)}</div></div>`;}
 function mini(r,c){return `<div class="mini"><div class="track"><div class="fill ${c}" style="width:${Math.min(100,(r||0)*100)}%"></div></div><span class="pct">${pct(r)}</span></div>`;}
 const AREA_ORDER=["교육혁신","고등직업교육혁신","산학·지역협력혁신","자율혁신","사업관리"];
 const areaRank=k=>{const i=AREA_ORDER.indexOf(k);return i<0?99:i;};
@@ -522,7 +591,7 @@ function _rb(){
   const areaHTML=areas.map(g=>barRow(g.k,`${won(g.exec)} / ${won(g.alloc)}`,g.alloc?g.exec/g.alloc:null)).join("")+barRow("합계",`${won(exec)} / ${won(alloc)}`,rate,"total");
   // 종합현황
   $("ov-donut").innerHTML=donut(rate,rc,200,pct(rate),"예산 집행률");
-  $("ov-pace").innerHTML=`<span class="pill ${rc}">${p>=1?`${curYear()}학년도 사업기간 종료`:"사업기간 경과 "+pct(p,0)}</span>`;
+  $("ov-pace").innerHTML="";
   $("ov-total").innerHTML=`${eok(total)}<small> 억원</small>`;
   $("ov-exec").innerHTML=`${eok(exec)}<small> 억원</small>`;
   $("ov-rem").innerHTML=`${eok(rem)}<small> 억원</small>`;
@@ -533,7 +602,7 @@ function _rb(){
   $("bars-area").innerHTML=areaHTML;
   const items=groupSum(P,"item").sort((a,b)=>b.alloc-a.alloc);
   $("bars-item").innerHTML=items.map(g=>barRow(g.k,`${won(g.exec)} / ${won(g.alloc)}`,g.alloc?g.exec/g.alloc:null)).join("");
-  $("pace-legend").innerHTML=`<span><i style="background:var(--good)"></i>진도율 이상</span><span><i style="background:var(--warn)"></i>진도율 −10%p 이내</span><span><i style="background:var(--bad)"></i>진도율 −10%p 초과 지연</span>`+(p<1?`<span><i style="background:var(--target);width:3px"></i>사업기간 경과 진도율 ${pct(p,0)}</span>`:`<span>사업기간(${curYear()}.3.~${+curYear()+1}.2.) 종료 — 100% 기준 판정</span>`);
+  $("pace-legend").innerHTML="";
   // 다. 부서별
   const depts=groupSum(P,"dept").sort((a,b)=>b.alloc-a.alloc);
   $("tb-dept").innerHTML=depts.map(g=>{const r=g.alloc?g.exec/g.alloc:null, t=g.trs.length?g.trs.reduce((a,b)=>a+b,0)/g.trs.length:null, open=openDepts.has(g.k);
