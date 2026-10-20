@@ -433,12 +433,14 @@ const XLSX_MIME="application/vnd.openxmlformats-officedocument.spreadsheetml.she
    ① 각 구글 스프레드시트: [파일 → 공유 → 웹에 게시] → '전체 문서' · 'Microsoft Excel(.xlsx)' 선택 → 게시
    ② 생성된 링크(…/pub?output=xlsx)를 아래 PUB_BUDGET / PUB_KPI 따옴표 안에 붙여넣기
    ※ 웹 게시 링크가 비어 있으면 시트 ID로 직접 읽기를 시도합니다(시트가 '링크가 있는 모든 사용자 보기'로 공유되어야 함).
-   ※ 자율성과지표: 「2026 전주비전대 혁신 자율성과 모니터링」 구글 스프레드시트 사용 */
+   ※ 자율성과지표: 「2. 혁신_자율성과지표 모니터링_2026.xlsx」(구글 드라이브 엑셀 파일) 사용
+   ※ 엑셀 파일을 브라우저에서 읽지 못하면 DRIVE_API_KEY(Google Drive API 키)를 입력하면 확실하게 읽힙니다. */
 const PUB_BUDGET = "";   // 예산 집행 시트 웹 게시 링크
 const PUB_KPI    = "";   // 자율성과지표 시트 웹 게시 링크
+const DRIVE_API_KEY = ""; // (선택) Google Drive API 키 — 웹사이트 주소 제한(jvision-univ.github.io) 권장
 /* ============================================================ */
-const DEFAULTS={pubBudget:PUB_BUDGET,pubKpi:PUB_KPI,auto:300000,year:"2026",budget:"1DSy1AykvwS8EUbiitkjwMyZirQ_sNRHAR54FV_DTr5A",kpi:"1gPFOgivQqbcNb0IKeJTC6WBDXMim6TLGJW1nBP5luBE"};
-const LS="innov-monitor-2026-github";
+const DEFAULTS={pubBudget:PUB_BUDGET,pubKpi:PUB_KPI,auto:300000,year:"2026",budget:"1DSy1AykvwS8EUbiitkjwMyZirQ_sNRHAR54FV_DTr5A",kpi:"1IjhRAuyoVU2A8re9lsem9l34DQxwrzRO"};
+const LS="innov-monitor-2026-github-v3";
 let cfg=Object.assign({auto:300000},DEFAULTS);
 try{const s=JSON.parse(localStorage.getItem(LS)||"null"); if(s) cfg=Object.assign(cfg,s);}catch(e){}
 
@@ -776,7 +778,10 @@ function input(kind){return {fileId:kind==="budget"?cfg.budget:cfg.kpi,exportMim
 function pubXlsx(u){u=(u||"").trim(); if(!u) return ""; if(/\/pubhtml/.test(u)) u=u.replace(/\/pubhtml.*$/,"/pub?output=xlsx"); else if(/\/pub(\?|$)/.test(u)) u=u.replace(/\/pub(\?.*)?$/,"/pub?output=xlsx"); return u;}
 async function fetchWb(kind){
   const id=kind==="budget"?cfg.budget:cfg.kpi, pub=pubXlsx(kind==="budget"?cfg.pubBudget:cfg.pubKpi);
-  const urls=[]; if(pub) urls.push(pub); if(id) urls.push(`https://docs.google.com/spreadsheets/d/${encodeURIComponent(id)}/export?format=xlsx`);
+  const e=encodeURIComponent(id||""), urls=[]; if(pub) urls.push(pub);
+  if(id){ if(DRIVE_API_KEY) urls.push(`https://www.googleapis.com/drive/v3/files/${e}?alt=media&supportsAllDrives=true&key=${encodeURIComponent(DRIVE_API_KEY)}`);
+    urls.push(`https://docs.google.com/spreadsheets/d/${e}/export?format=xlsx`);
+    urls.push(`https://drive.usercontent.google.com/download?id=${e}&export=download&confirm=t`); }
   let last=new Error("시트 주소가 설정되지 않았습니다.");
   for(const u of urls){
     try{ const r=await fetch(u+(u.includes("?")?"&":"?")+"_t="+Date.now(),{cache:"no-store",credentials:"omit"});
